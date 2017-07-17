@@ -13,7 +13,7 @@
 body {
   font-family: Arial, Helvetica, sans-serif;
 	background: #555;
-	background: linear-gradient(to right, #fff, #ccc, #ccc, #ccc, #fff); 
+	background: linear-gradient(to right, #fff, #ccc, #fff, #ccc, #fff); 
   margin: 0;
 }
 a {
@@ -27,7 +27,7 @@ h1 {
     font-size: 42px; 
     font-weight: bold; 
     background-color: #2a6fdd;
-    margin: 10px 0 10px 0; 
+    margin: 0px 0 0px 0; 
     text-shadow: 3px 3px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
     text-align: center;
     border-bottom: 2px solid black;
@@ -36,13 +36,19 @@ h2 {
   color: #111;
   text-decoration: none;
 }
+h4 {
+    margin: 4px 0px 0px;
+}
 .mcontent {
     width: 1000px;
     margin: 0 auto;
+    padding: 20px 100px;
     background-color: #fff;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
 }
 .article {
-  margin: 10px;
+  margin: 50px 10px 10px 10px;
 }
 .content {  }
 .foot {
@@ -52,8 +58,8 @@ h2 {
   </style>
  </head>
  <body>
-  <div class="mcontent">
    <h1>Greg Builds Computers</h1>
+  <div class="mcontent">
    
    <div class="article">
     <a href="#01" name="01"><h2>First Edition Build | Intel Core-i3 16GB GTX 1060 1TB HDD Windows 10 Desktop Computer</h2></a>
@@ -174,64 +180,49 @@ Free shipping with USPS Retail Ground estimated 2-9 business days shipping time.
     <div class="content">
     <img src="images/parts02-banner.png" style="width: 100%"/>
       <h3>Parts</h3>
-<h4>CPU
-</h4><br>
+    <div style="float: right; margin: 12px;">
+        <img src="images/03.jpg" style="width: 300px;"/>
+    </div>
+<h4>CPU</h4>
 Intel - Core i5-6600K 3.5GHz Quad-Core Processor
 <br>
-<br>
-<h4>CPU Cooler  
-</h4><br>
+<h4>CPU Cooler  </h4>
 Cooler Master - Hyper T4 70.0 CFM Rifle Bearing CPU Cooler
 <br>
-<br>
-<h4>Motherboard 
-</h4><br>
+<h4>Motherboard </h4>
 MSI - Z170A PC MATE ATX LGA1151 Motherboard
 <br>
-<br>
-<h4>Memory  
-</h4><br>
+<h4>Memory  </h4>
 G.Skill - Value 16GB (4 x 4GB) DDR4-2400 Memory
 <br>
-<br>
-<h4>Storage 
-</h4><br>
+<h4>Storage </h4>
 Samsung - SM951 128GB M.2-2280 Solid State Drive
 <br>
 Hitachi - Deskstar 1TB 3.5" 7200RPM Internal Hard Drive
 <br>
-<br>
-<h4>Video Card  
-</h4><br>
+<h4>Video Card  </h4>
 PNY - GeForce GTX 750 1GB Enthusiast Edition Video Card
 <br>
-<br>
-<h4>Case    
-</h4><br>
+<h4>Case    </h4>
 Apevia - X-Gear Green ATX Mid Tower Case w/420W Power Supply
 <br>
-<br>
-<h4>Power Supply    
-</h4><br>
+<h4>Power Supply    </h4>
 Corsair - CSM 450W 80+ Gold Certified Semi-Modular ATX Power Supply
 <br>
-<br>
-<h4>Optical Drive   
-</h4><br>
+<h4>Optical Drive   </h4>
 Asus - DRW-24B1ST/BLK/B/AS DVD/CD Writer
 <br>
-<br>
-<h4>Operating System    
-</h4><br>
+<h4>Operating System    </h4>
 Microsoft - Windows 8.1 Pro OEM 64-bit
 <br>
-<br>
-<h4>Case Fan    
-</h4><br>
+<h4>Case Fan    </h4>
 Cooler Master - SickleFlow 69.7 CFM 120mm Fan
 <br>
-
+    <hr />
       <h3>Description</h3>
+    <div style="float: right; margin: 12px;">
+        <img src="images/01.jpg" style="width: 220px;"/>
+    </div>
         <p>I designed this computer to be my home computer for programming, game development, and gaming. The goal was to achieve a modestly powerful build on a budget. Here the budget is $1,000.</p>
         <p>The target operating system is Windows 10 as well as earlier versions of Windows in a virtual machine for complete compatibility and a virtual installation of Debian for development work. Windows will run in VMWare for legacy games and Linux will run in Hyper-V for performance.</p>
         <p>The best processor and graphics card combination on this budget, for our use case, is the Intel Core i5-6600K (Skylake) and the PNY GeForce GTX 750 (1 GB, dual fans). It makes sense to spend twice as much on the CPU because of our programming and processor intensive applications that we might run, including computer modeling.</p>
@@ -243,6 +234,9 @@ Cooler Master - SickleFlow 69.7 CFM 120mm Fan
         <p>* Hyperthreading is hardware support for more logical threads than physical cores.</p>
         <hr />
       <h3>Installation Steps</h3>
+    <div style="float: right; margin: 12px;">
+        <img src="images/02.jpg" style="width: 300px;"/>
+    </div>
         <p>1) Install the CPU on the motherboard. The LGA 1151 socket is relatively straightforward, but it does required a significant amount of force to close the levers on the CPU. Interestingly, this chip does not have pins.</p>
         <p>2) Install the power supply unit in the case. This is pretty straightforward and just involves fastening four screws tightly on the back of the case, as long as the PSU is above the load bearing metal bar that runs across it.</p>
         <p>3) Place the heat sink backing plate behind the motherboard. Make sure the screws on the backing plate are adjusted to the right size and position for your motherboard.</p>
@@ -270,8 +264,10 @@ Cooler Master - SickleFlow 69.7 CFM 120mm Fan
    </div>
    <hr><br>
    <div class="foot">
+     Phone: <img src="images/phone.png" style="height: 18px; margin-bottom: -3px"><br>
      Copyright &copy; 2017 GregBuildsComputers.com
    </div>
+   <br>
   </div>
  </body>
 </html>
