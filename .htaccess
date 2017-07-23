@@ -1,0 +1,12 @@
+DirectoryIndex index.py
+#RedirectMatch 301 (.*)\.html$ $1.py
+ErrorDocument 400 /index.py?error=400
+ErrorDocument 401 /index.py?error=401
+ErrorDocument 403 /index.py?error=403&details=Permission%20Denied
+ErrorDocument 404 /index.py?error=404&details=File%20Not%20Found
+ErrorDocument 500 /index.py?error=500&details=Server%20Error
+
+Order Allow,Deny
+<FilesMatch "index.py|\.css$|\.ico$|\.jpg$|\.png$">
+Allow from all
+</FilesMatch>
