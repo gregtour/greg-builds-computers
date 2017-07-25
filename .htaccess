@@ -1,14 +1,16 @@
-Options +FollowSymLinks
+Options -MultiViews
 
 RewriteEngine on
 RewriteBase /
 
 RewriteRule ^$ index.py
+RewriteRule index.php index.py
 
 RewriteCond %{REQUEST_URI} !\.(jpg|png|css|js|ico)
 RewriteCond %{REQUEST_URI} (home|post|listing)
 RewriteRule ^([^\/]+)/([^\/]+) index.py?$1=$2
 
+ErrorDocument 300 /index.py?error=404
 ErrorDocument 400 /index.py?error=400
 ErrorDocument 401 /index.py?error=401
 ErrorDocument 403 /index.py?error=403

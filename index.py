@@ -207,7 +207,11 @@ if 'post' in arguments:
 elif 'listing' in arguments:
 	displayListing(arguments['listing'].value)
 elif 'error' in arguments:
-	displayError(arguments['error'].value)
+	try:
+		value = int(arguments['error'].value)
+	except:
+		value = -1
+	displayError(str(value))
 else:
 	displayHome()
 
