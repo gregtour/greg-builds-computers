@@ -1,5 +1,6 @@
 title:First Edition Build<br>Intel Core-i3 16GB GTX 1060 1TB HDD Windows 10 Desktop Computer
 summary:Buy a new computer that is VR Ready!
+price:$799
 image:build-white.jpg
 thumb:build-white.jpg
 date:07-17-2017

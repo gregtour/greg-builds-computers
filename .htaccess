@@ -1,12 +1,16 @@
-DirectoryIndex index.py
-#RedirectMatch 301 (.*)\.html$ $1.py
+Options +FollowSymLinks
+
+RewriteEngine on
+RewriteBase /
+
+RewriteRule ^$ index.py
+
+RewriteCond %{REQUEST_URI} !\.(jpg|png|css|js|ico)
+RewriteCond %{REQUEST_URI} (home|post|listing)
+RewriteRule ^([^\/]+)/([^\/]+) index.py?$1=$2
+
 ErrorDocument 400 /index.py?error=400
 ErrorDocument 401 /index.py?error=401
-ErrorDocument 403 /index.py?error=403&details=Permission%20Denied
-ErrorDocument 404 /index.py?error=404&details=File%20Not%20Found
-ErrorDocument 500 /index.py?error=500&details=Server%20Error
-
-Order Allow,Deny
-<FilesMatch "index.py|\.css$|\.ico$|\.jpg$|\.png$">
-Allow from all
-</FilesMatch>
+ErrorDocument 403 /index.py?error=403
+ErrorDocument 404 /index.py?error=404
+ErrorDocument 500 /index.py?error=500

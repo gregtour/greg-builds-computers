@@ -11,6 +11,28 @@ def debugPrint(s):
 	global DEBUG_TEXT
 	DEBUG_TEXT = DEBUG_TEXT + str(s) + "\n"
 
+# read a unicode file
+def readfile(filename):
+	handle = codecs.open(filename)
+	return handle.read()
+
+# replace ${} tags with dictionary values or empty string
+def fill(text, values):
+	instances = re.findall("\$\{\w*\}", text)
+	if instances and len(instances) > 0:
+		for key in instances:
+			unwrapped = key[2:-1]
+
+			if unwrapped in values:
+				text = text.replace(key, str(values[unwrapped]))
+			else:
+				text = text.replace(key, '')
+	return text
+
+# main layout as stored in html
+PAGE = readfile("page.html")
+
+# /error/code page and internal errors
 ERROR_FORMAT = """
 <!-- WEBSITE ERROR -->
 <div id="blog">
@@ -25,6 +47,7 @@ ERROR_FORMAT = """
 </div>
 """
 
+# blog post page format
 BLOG_FORMAT = """
 <!-- 
 WEBSITE PAGE ${id}
@@ -50,27 +73,41 @@ ${product}
 </div>
 """
 
-HOME_FORMAT = """
-
-
-"""
-
+# directory listing format - entry
 LISTING_ENTRY = """
-<a href="/?"></a>
+<a href="/?"></a><br>
 """
 
+# directory listing format
 LISTING_FORMAT = """
+	<h2>Directory listing</h2>
 	<p>
 		${entries}
 	</p>
 """
 
-# read a unicode file
-def readfile(filename):
-	handle = codecs.open(filename)
-	return handle.read()
+# home page format - entry
+HOME_PAGE_ENTRY = """
+		<div class="home-entry">
+		  <a href="/post/${id}" class="link"><h4>${title}</h4></a>
+		  <span class="price">${price}</span>
+		  <p>
+		    <img class="home-thumb" src="/images/${thumb}"><br>
+		    ${summary}
+		  </p>
+		</div>
+"""
 
-PAGE = readfile("page.html")
+# home page format
+HOME_FORMAT = """
+<div id="homepage">
+	<h1>Home Page</h1>
+	<p>
+		${entries}
+	</p>
+	<a href="/home/${previous}"><< prev</a> &nbsp;&nbsp; ${pagenum} &nbsp;&nbsp; <a href="/home/${next}">next >></a>
+</div>
+"""
 
 # parse a post file
 ARTICLES = dict()
@@ -93,13 +130,12 @@ def parsedata(textdata, id = 0):
 	# condense the rest into the content tag
 	data['content'] = '\n'.join(lines[linenum+1:])
 	# format the date
-	data['timestamp'] = "recently"
+	data['timestamp'] = "this day last week"
 	if 'date' in data:
 		stamp = time.strptime(data['date'], "%m-%d-%Y")
 		if stamp:
 			data['timestamp'] = time.strftime("%B %d, %Y", stamp)
 	# store the post in the lookup table
-	debugPrint("Adding article to index " + str(id))
 	ARTICLES[id] = data
 	return data
 
@@ -118,33 +154,23 @@ def loadposts():
 					posts.append(post)
 	return posts
 
-# replace ${} tags with dictionary values or empty string
-def inject(text, values):
-	instances = re.findall("\$\{\w*\}", text)
-	if instances and len(instances) > 0:
-		for key in instances:
-			unwrapped = key[2:-1]
 
-			if unwrapped in values:
-				#debugPrint("Replacing '%s' with '%s'" % (key, str(values[unwrapped])))
-				text = text.replace(key, str(values[unwrapped]))
-			else:
-				text = text.replace(key, '')
-	return text
 
 # insert into ${main_content}
 def display(content):
-	print inject(PAGE, {'main_content': content})
+	print fill(PAGE, {'main_content': content})
 
 # error page
-def displayError(message = "", details = ""):
+def displayError(errorcode = "Error."):
+	message = cgi.escape(errorcode)
+	details = 'Return home: <a href="//gregbuildscomputers.com">gregbuildscomputers.com</a>'
 	values = dict([('error', message), ('details', details)])
-	content = inject(ERROR_FORMAT, values)
+	content = fill(ERROR_FORMAT, values)
 	display(content)
 
 # display a list of posts and listings
 def displayListing(param):
-	display('Directory listing:')
+	display(LISTING_FORMAT)
 
 # display a specific post or listing
 def displayPost(postStr):
@@ -154,19 +180,22 @@ def displayPost(postStr):
 	except:
 		postNum = -1
 
-	debugPrint("Post string: '" + str(postStr) + "'")
-	debugPrint("Post num: " + str(postNum))
-
 	if postNum >= 0 and postNum in ARTICLES:
 		post = ARTICLES[postNum]
-		content = inject(BLOG_FORMAT, post)
+		content = fill(BLOG_FORMAT, post)
 		display(content)
 	else:
-		displayError("Can't find post.", 'Return home: <a href="http://gregbuildscomputers.com/">gregbuildscomputers.com</a>')
+		displayError("Can't find post.")
 
 # display the home page
 def displayHome():
-	display("<h1>Homepage</h1>")
+	entries = ""
+	posts = postdata[0:10]
+	for post in posts:
+		entry = fill(HOME_PAGE_ENTRY, post)
+		entries = entries + entry
+	content = fill(HOME_FORMAT, {'entries': entries, 'previous': 0, 'pagenum': 1, 'next': 2})
+	display(content)
 
 # parse params and load site data
 arguments = cgi.FieldStorage()
@@ -178,11 +207,9 @@ if 'post' in arguments:
 elif 'listing' in arguments:
 	displayListing(arguments['listing'].value)
 elif 'error' in arguments:
-	details = ''
-	if 'details' in arguments:
-		details = arguments['details'].value
-	displayError(arguments['error'].value, details)
+	displayError(arguments['error'].value)
 else:
 	displayHome()
 
+debugPrint("Loaded " + str(len(postdata)) + " posts.")
 print "<!-- \n" + DEBUG_TEXT + " -->"

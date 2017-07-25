@@ -4,11 +4,11 @@ image:02.jpg
 thumb:03.jpg
 date:07-16-2017
 content:
-<img src="images/parts02-banner.png" style="width: 100%"/>
+<img src="/images/parts02-banner.png" style="width: 100%"/>
 
 <hr><h3>Parts</h3>
 <div style="float: right; margin: 12px;">
-	<img src="images/03.jpg" style="width: 300px;"/>
+	<img src="/images/03.jpg" style="width: 300px;"/>
 </div>
 
 <h4>CPU</h4>
@@ -49,7 +49,7 @@ Cooler Master - SickleFlow 69.7 CFM 120mm Fan
 
 <hr><h3>Description</h3>
 <div style="float: right; margin: 12px;">
-	<img src="images/01.jpg" style="width: 220px;"/>
+	<img src="/images/01.jpg" style="width: 220px;"/>
 </div>
 <p>I designed this computer to be my home computer for programming, game development, and gaming. The goal was to achieve a modestly powerful build on a budget. Here the budget is $1,000.</p>
 <p>The target operating system is Windows 10 as well as earlier versions of Windows in a virtual machine for complete compatibility and a virtual installation of Debian for development work. Windows will run in VMWare for legacy games and Linux will run in Hyper-V for performance.</p>
@@ -63,7 +63,7 @@ Cooler Master - SickleFlow 69.7 CFM 120mm Fan
 
 <hr><h3>Installation Steps</h3>
 <div style="float: right; margin: 12px;">
-	<img src="images/02.jpg" style="width: 300px;"/>
+	<img src="/images/02.jpg" style="width: 300px;"/>
 </div>
 <p>1) Install the CPU on the motherboard. The LGA 1151 socket is relatively straightforward, but it does require a significant amount of force to close the levers on the CPU. Interestingly, this chip does not have pins.</p>
 <p>2) Install the power supply unit in the case. This is pretty straightforward and just involves fastening four screws tightly on the back of the case, as long as the PSU is above the load bearing metal bar that runs across it.</p>
